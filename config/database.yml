@@ -1,0 +1,21 @@
+default: &default
+  adapter:  postgresql
+  encoding: unicode
+  port:     <%= ENV.fetch("POSTGRESQL_PORT", "5432") %>
+  pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['POSTGRESQL_USER_NAME'] %>
+  password: <%= ENV['POSTGRESQL_PASSWORD'] %>
+  host:     <%= ENV['POSTGRESQL_HOST'] %>
+
+staging:
+  <<: *default
+  database: <%= ENV['POSTGRESQL_DB'] %>
+
+testing:
+  <<: *default
+  database: <%= ENV['POSTGRESQL_DB'] %>-test
+  host: db
+
+production:
+  <<: *default
+  database: <%= ENV['POSTGRESQL_DB'] %>

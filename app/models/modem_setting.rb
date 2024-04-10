@@ -1,0 +1,2 @@
+class ModemSetting < ApplicationRecord
+end
